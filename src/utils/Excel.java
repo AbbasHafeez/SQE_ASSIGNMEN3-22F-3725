@@ -1,5 +1,6 @@
 package utils;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -8,10 +9,12 @@ import java.io.IOException;
 
 public class Excel implements AutoCloseable {
     private Workbook workbook;
+    private Sheet sheet;
 
-    public Excel(String filePath) throws IOException {
-        try (FileInputStream fileInputStream = new FileInputStream("C:\\Users\\engineer\\Desktop\\SQE_ASSIGNMENT_3_22F-3725\\src\\TESTCASES.xlsx")) {
-            workbook = new XSSFWorkbook("Sheet1"); // Use XSSFWorkbook for .xlsx files
+    public Excel(String filePath, String sheetName) throws IOException {
+        try (FileInputStream fileInputStream = new FileInputStream("TESTCASES.xls")) {
+            workbook = new HSSFWorkbook(fileInputStream); // Use XSSFWorkbook for .xlsx files
+            sheet = workbook.getSheet(sheetName);
         }
     }
 
